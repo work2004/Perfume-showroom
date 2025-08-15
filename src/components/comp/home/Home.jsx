@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -17,7 +18,6 @@ function Home() {
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_fFY2Fokk3rixuWifGaGZQXKNtIbWVbK8Js9dMH6qvxH55ErtCcjrosYA2pfU1FIGP4Q&usqp=CAU",
     ];
     const [index, setIndex] = useState(0);
-
     useEffect(() => {
         const interval = setInterval(() => {
             setIndex((prev) => (prev + 1) % perfumeImages.length);
@@ -25,11 +25,82 @@ function Home() {
         return () => clearInterval(interval);
     }, []);
 
+    const [currentIndex, setCurrentIndex] = useState(0);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % perfumes.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const perfumes = [
+        {
+            name: "Royal Essence",
+            price: "₹920",
+            image: "https://cdn.pixabay.com/photo/2021/05/02/14/53/perfume-6223754_1280.jpg",
+        },
+        {
+            name: "Velvet Bloom",
+            price: "₹995",
+            image: "https://boisdejasmin.com/images/old/6a00d8341c706153ef0147e24f5e2d970b-pi.jpg",
+        },
+        {
+            name: "Amber Nights",
+            price: "₹850",
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpLJsXgGWW3pEcg_NT9QKdOKNTZ34TKGV37g&s",
+        },
+        {
+            name: "Jaguar Perfume",
+            price: "₹480",
+            image: "https://img.tatacliq.com/images/i18//437Wx649H/MP000000007906649_437Wx649H_202407190006164.jpeg",
+        },
+        {
+            name: "Jaguar Perfume",
+            price: "₹280",
+            image: "https://m.media-amazon.com/images/I/61uXQC-ja-L._AC_SY200_QL15_.jpg",
+        },
+
+    ];
+
+    const categories = [
+        {
+            name: "For Man",
+            img: "https://i.ebayimg.com/images/g/nEwAAOSwUohnXIhA/s-l1200.jpg",
+            link: "/shop?category=him",
+        },
+        {
+            name: "For Women",
+            img: "https://images.meesho.com/images/products/398735143/h8piv_512.webp?width=512",
+            link: "/shop?category=her",
+        },
+        {
+            name: "For Couples",
+            img: "https://www.shutterstock.com/image-photo/passionate-woman-handsome-man-using-600nw-1068861017.jpg",
+            link: "/shop?category=unisex",
+        },
+        {
+            name: "Love At First Sniff",
+            img: "https://www.scentbird.com/blog/wp-content/uploads/2025/04/ea6c2ac0-1ad5-4a5b-bd8e-721a0be709a1.png",
+            link: "/shop?category=unisex",
+        },
+        {
+            name: "First Love",
+            img: "https://cdn.prod.website-files.com/61a5d57e5f1c45eecb23d528/668e224ebf664077c91872b3_7%20aphrodisiacs%20women%20thumb.jpg",
+            link: "/shop?category=unisex",
+        },
+        {
+            name: "Fresh For You",
+            img: "https://zntus.com/wp-content/uploads/2025/01/best-perfumes-for-women.png",
+            link: "/shop?category=unisex",
+        }
+
+
+    ];
     return (
         <>
             <div className="container-fluid">
                 <div className="row">
-                    <section className="relative overflow-hidden">
+                    <div className="relative overflow-hidden">
                         <div className="pointer-events-none absolute inset-0 -z-10">
                             <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-purple-300/30 blur-3xl" />
                             <div className="absolute -bottom-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-pink-300/30 blur-3xl" />
@@ -88,6 +159,89 @@ function Home() {
                                         </div>
                                     </motion.div>
                                 </motion.div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="py-12 bg-gradient-to-r from-amber-900 via-[#2c1810] to-black">
+                        <div className="max-w-7xl mx-auto px-4">
+                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
+                                Featured Perfumes
+                            </h2>
+
+                            <div className="relative overflow-hidden">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={currentIndex}
+                                        initial={{ opacity: 0, x: 100 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -100 }}
+                                        transition={{ duration: 0.8 }}
+                                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+                                    >
+                                        {perfumes
+                                            .slice(currentIndex, currentIndex + 3)
+                                            .map((perfume, idx) => (
+                                                <motion.div
+                                                    key={idx}
+                                                    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                                                >
+                                                    <img
+                                                        src={perfume.image}
+                                                        alt={perfume.name}
+                                                        className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300 rounded-t-2xl"
+                                                    />
+                                                    <div className="p-5 text-center">
+                                                        <h3 className="text-lg font-semibold text-gray-900">
+                                                            {perfume.name}
+                                                        </h3>
+                                                        <p className="text-purple-700 font-medium mt-1">
+                                                            {perfume.price}
+                                                        </p>
+                                                    </div>
+                                                </motion.div>
+                                            ))}
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <section className="py-16 bg-gradient-to-r from-purple-50 via-white to-purple-50">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <motion.h2
+                                className="text-3xl md:text-4xl font-extrabold text-gray-900 text-center mb-10"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6 }}
+                            >
+                                Explore <span className="text-purple-600">Categories</span>
+                            </motion.h2>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                                {categories.map((cat, index) => (
+                                    <motion.div
+                                        key={index}
+                                        whileHover={{ scale: 1.05 }}
+                                        className="relative overflow-hidden rounded-2xl shadow-lg cursor-pointer"
+                                    >
+                                        <Link to={cat.img}>
+                                            <img
+                                                src={cat.img}
+                                                alt={cat.name}
+                                                className="w-full h-64 object-cover rounded-2xl transition-transform duration-300"
+                                            />
+                                            <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                                <span className="text-white text-xl font-semibold">{cat.name}</span>
+                                            </div>
+                                        </Link>
+                                    </motion.div>
+                                ))}
                             </div>
                         </div>
                     </section>
