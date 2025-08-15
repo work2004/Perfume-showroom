@@ -1,0 +1,9 @@
+Homepage design
+
+Product listing (Shop page)
+
+Cart & checkout
+
+Login/Signup with Protected Routes
+
+Admin panel for product management
