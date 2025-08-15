@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+// Perfume data
 const perfumes = [
     {
         id: 1,
@@ -12,9 +13,9 @@ const perfumes = [
         description:
             "A fresh, invigorating scent with hints of sea salt and citrus, perfect for daytime wear and summer vibes.",
         images: [
-            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+            "https://rukminim2.flixcart.com/image/704/844/xif0q/perfume/5/1/t/100-ocean-breeze-perfume-fresh-and-exhilarating-scent-long-original-imagz3y44zaxtntm.jpeg?q=90&crop=false",
+            "https://labelleperfumes.com/cdn/shop/files/ocean-breeze-milestone_1024x.webp?v=1720725925",
+            "https://i.ebayimg.com/images/g/VgAAAOSw5GhmYf63/s-l400.jpg",
         ],
     },
     {
@@ -42,9 +43,9 @@ const perfumes = [
         description:
             "A romantic floral scent with delicate rose notes, perfect for casual and evening wear.",
         images: [
-            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVbwfGUMetN1dgs9EaiPjbUdWIqn6dDwaNsw&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT7R_IDLOIVI10p1gf6QwhCn0C9OWYF-jMjw&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjK0jrrry9hoMm7c1-e_jOz4OwtVCKk8Nv-w&s",
         ],
     },
     {
@@ -156,104 +157,115 @@ const perfumes = [
 
 
 const Shop = () => {
-    return (
-        <div className="py-12 px-4 md:px-12 bg-gradient-to-b from-purple-50 to-white">
-            <h1 className="text-3xl md:text-5xl font-bold text-center mb-8 text-purple-900">
-                Our Exclusive Perfumes
-            </h1>
+  return (
+    <div className="py-12 px-4 md:px-12 bg-gradient-to-b from-purple-50 to-white">
+      <h1 className="text-3xl md:text-5xl font-bold text-center mb-8 text-purple-900">
+        Our Exclusive Perfumes
+      </h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {perfumes.map((perfume) => (
-                    <PerfumeCard key={perfume.id} perfume={perfume} />
-                ))}
-            </div>
-        </div>
-    );
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {perfumes.map((perfume) => (
+          <PerfumeCard key={perfume.id} perfume={perfume} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 const PerfumeCard = ({ perfume }) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [hovered, setHovered] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-    // Auto-slide on hover
-    useEffect(() => {
-        if (!hovered) return;
+  // Detect mobile
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-        const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % perfume.images.length);
-        }, 2000);
+  // Slide logic
+  useEffect(() => {
+    // Desktop: hover, Mobile: always auto-slide
+    if (!hovered && !isMobile) return;
 
-        return () => clearInterval(interval);
-    }, [hovered, perfume.images.length]);
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % perfume.images.length);
+    }, 2000);
 
-    // Render rating stars
-    const renderStars = (rating) => {
-        const fullStars = Math.floor(rating);
-        const halfStar = rating % 1 >= 0.5;
-        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-        return (
-            <div className="flex items-center mt-1">
-                {[...Array(fullStars)].map((_, i) => (
-                    <span key={`full-${i}`} className="text-yellow-400">★</span>
-                ))}
-                {halfStar && <span className="text-yellow-400">☆</span>}
-                {[...Array(emptyStars)].map((_, i) => (
-                    <span key={`empty-${i}`} className="text-gray-300">★</span>
-                ))}
-                <span className="ml-2 text-sm text-gray-500">{rating.toFixed(1)}</span>
-            </div>
-        );
-    };
+    return () => clearInterval(interval);
+  }, [hovered, isMobile, perfume.images.length]);
 
+  // Rating stars
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
     return (
-        <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-white rounded-xl shadow-lg flex flex-col md:flex-row cursor-pointer hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => {
-                setHovered(false);
-                setCurrentIndex(0);
-            }}
-        >
-            {/* Image */}
-            <div className="w-full md:w-1/2 h-48 md:h-auto relative overflow-hidden">
-                <motion.div
-                    animate={{ x: -currentIndex * 100 + "%" }}
-                    transition={{ type: "tween", duration: 0.8 }}
-                    className="flex w-full h-full"
-                >
-                    {perfume.images.map((img, i) => (
-                        <img
-                            key={i}
-                            src={img}
-                            alt={perfume.name}
-                            className="w-full flex-shrink-0 h-48 md:h-full object-cover"
-                        />
-                    ))}
-                </motion.div>
-            </div>
-
-            {/* Data */}
-            <div className="w-full md:w-1/2 p-4 flex flex-col justify-between">
-                <div>
-                    <h2 className="text-xl font-semibold">{perfume.name}</h2>
-                    {renderStars(perfume.rating)}
-                    <p className="mt-1 text-gray-700 text-sm"><strong>Brand:</strong> {perfume.brand}</p>
-                    <p className="mt-1 text-gray-700 text-sm"><strong>Volume:</strong> {perfume.volume}</p>
-                    <p className="mt-2 text-gray-600 text-sm">{perfume.description}</p>
-                </div>
-                <div>
-                    <p className="mt-2 text-lg text-purple-800 font-bold">{perfume.price}</p>
-                    <button
-                        className="mt-2 bg-purple-700 text-white py-2 px-4 rounded-lg hover:bg-purple-800 transition-colors duration-300"
-                        onClick={() => alert(`Added ${perfume.name} to cart!`)}
-                    >
-                        Buy Now
-                    </button>
-                </div>
-            </div>
-        </motion.div>
+      <div className="flex items-center mt-1">
+        {[...Array(fullStars)].map((_, i) => (
+          <span key={`full-${i}`} className="text-yellow-400">★</span>
+        ))}
+        {halfStar && <span className="text-yellow-400">☆</span>}
+        {[...Array(emptyStars)].map((_, i) => (
+          <span key={`empty-${i}`} className="text-gray-300">★</span>
+        ))}
+        <span className="ml-2 text-sm text-gray-500">{rating.toFixed(1)}</span>
+      </div>
     );
+  };
+
+  return (
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      className="bg-white rounded-xl shadow-lg flex flex-col md:flex-row cursor-pointer hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
+      onMouseEnter={() => !isMobile && setHovered(true)}
+      onMouseLeave={() => !isMobile && (setHovered(false), setCurrentIndex(0))}
+    >
+      {/* Image Slider */}
+      <div className="w-full md:w-1/2 h-48 md:h-48 relative overflow-hidden flex-shrink-0">
+        <motion.div
+          animate={{ x: -currentIndex * 100 + "%" }}
+          transition={{ type: "tween", duration: 0.8 }}
+          className="flex w-full h-full"
+        >
+          {perfume.images.map((img, i) => (
+            <img
+              key={i}
+              src={img}
+              alt={perfume.name}
+              className="w-full flex-shrink-0 h-full object-contain p-2 bg-gray-50 rounded-lg"
+            />
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Data */}
+      <div className="w-full md:w-1/2 p-4 flex flex-col justify-between">
+        <div>
+          <h2 className="text-xl font-semibold truncate">{perfume.name}</h2>
+          {renderStars(perfume.rating)}
+          <p className="mt-1 text-gray-700 text-sm truncate">
+            <strong>Brand:</strong> {perfume.brand}
+          </p>
+          <p className="mt-1 text-gray-700 text-sm truncate">
+            <strong>Volume:</strong> {perfume.volume}
+          </p>
+          <p className="mt-2 text-gray-600 text-sm line-clamp-3">{perfume.description}</p>
+        </div>
+        <div>
+          <p className="mt-2 text-lg text-purple-800 font-bold">{perfume.price}</p>
+          <button
+            className="mt-2 bg-purple-700 text-white py-2 px-4 rounded-lg hover:bg-purple-800 transition-colors duration-300"
+            onClick={() => alert(`Added ${perfume.name} to cart!`)}
+          >
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
 };
 
 export default Shop;
