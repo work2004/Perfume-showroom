@@ -239,6 +239,7 @@ function Home() {
                                             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                                                 <span className="text-white text-xl font-semibold">{cat.name}</span>
                                             </div>
+                                            <h2 className="text-center text-2xl font-bold py-1">{cat.name}</h2>
                                         </Link>
                                     </motion.div>
                                 ))}
