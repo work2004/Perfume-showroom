@@ -250,5 +250,7 @@ function Home() {
             </div>
         </>
     )
+
+    // comment home page
 }
 export default Home;
