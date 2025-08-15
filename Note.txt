@@ -7,3 +7,62 @@ Cart & checkout
 Login/Signup with Protected Routes
 
 Admin panel for product management
+
+
+"https://images.unsplash.com/photo-1523293182086-7651a899d37f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyZnVtZSUyMGJvdHRsZXxlbnwwfHwwfHx8MA%3D%3D",
+                "https://images.pexels.com/photos/1961792/pexels-photo-1961792.jpeg?cs=srgb&dl=pexels-valeriya-1961792.jpg&fm=jpg",
+                "https://images.pexels.com/photos/1961792/pexels-photo-1961792.jpeg?cs=srgb&dl=pexels-valeriya-1961792.jpg&fm=jpg",
+
+
+
+
+                const perfumes = [
+  {
+    id: 1,
+    name: "Ocean Breeze",
+    price: "₹2500",
+    description:
+      "A fresh, invigorating scent with hints of sea salt and citrus, perfect for daytime wear and summer vibes.",
+    images: [
+      "https://i.ebayimg.com/images/g/9FgAAOSwi9Nm2GJ-/s-l1200.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU-PfO-UjVMk5pIAQzK9u4knT9V3aVVNrFrlSBOfHJ1Bi5vy_UoJmV7wHbxTdXX4GLftU&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiEYAga2vZ0NhkIXgIOaOHhHnz2fuVGzXMmzlZPknVMFX8XqetE-WT8DYG7lbe_5_-yqs&usqp=CAU",
+    ],
+  },
+  {
+    id: 2,
+    name: "Mystic Oud",
+    price: "₹3200",
+    description:
+      "An exotic, deep fragrance with rich oud and smoky undertones, ideal for evening events or special occasions.",
+    images: [
+      "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+    ],
+  },
+  {
+    id: 3,
+    name: "Rose Elegance",
+    price: "₹1800",
+    description:
+      "A delicate floral fragrance with notes of fresh roses and soft musk, creating a romantic and elegant aura.",
+    images: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT7R_IDLOIVI10p1gf6QwhCn0C9OWYF-jMjw&s",
+      "https://images.meesho.com/images/products/521326816/qkpyt_512.jpg",
+      "https://images.meesho.com/images/products/521348323/ox8wc_256.webp",
+    ],
+  },
+  {
+    id: 4,
+    name: "Citrus Delight",
+    price: "₹2000",
+    description:
+      "A vibrant, energizing perfume with bright citrus notes, perfect for daily wear and uplifting your mood.",
+    images: [
+      "https://5.imimg.com/data5/SELLER/Default/2025/1/481739661/TS/TI/KV/25292871/50-ml-connec-citrus-delight-perfumes-500x500.jpg",
+      "https://images.meesho.com/images/products/444357973/nobia_512.webp?width=512",
+      "https://images.meesho.com/images/products/444357973/j9stp_512.webp?width=512",
+    ],
+  }
+];

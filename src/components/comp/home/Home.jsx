@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Truck, Gift, Shield } from "lucide-react"; // icons
+import Footer from "../../section/footer/Footer";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -33,34 +35,6 @@ function Home() {
         return () => clearInterval(interval);
     }, []);
 
-    const perfumes = [
-        {
-            name: "Royal Essence",
-            price: "₹920",
-            image: "https://cdn.pixabay.com/photo/2021/05/02/14/53/perfume-6223754_1280.jpg",
-        },
-        {
-            name: "Velvet Bloom",
-            price: "₹995",
-            image: "https://boisdejasmin.com/images/old/6a00d8341c706153ef0147e24f5e2d970b-pi.jpg",
-        },
-        {
-            name: "Amber Nights",
-            price: "₹850",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpLJsXgGWW3pEcg_NT9QKdOKNTZ34TKGV37g&s",
-        },
-        {
-            name: "Jaguar Perfume",
-            price: "₹480",
-            image: "https://img.tatacliq.com/images/i18//437Wx649H/MP000000007906649_437Wx649H_202407190006164.jpeg",
-        },
-        {
-            name: "Jaguar Perfume",
-            price: "₹280",
-            image: "https://m.media-amazon.com/images/I/61uXQC-ja-L._AC_SY200_QL15_.jpg",
-        },
-
-    ];
 
     const categories = [
         {
@@ -96,6 +70,114 @@ function Home() {
 
 
     ];
+    const features = [
+        {
+            icon: <Truck className="w-10 h-10 text-purple-600" />,
+            title: "Free Shipping",
+            description: "Get your favorite perfumes delivered to your doorstep without any extra cost.",
+        },
+        {
+            icon: <Gift className="w-10 h-10 text-purple-600" />,
+            title: "Premium Packaging",
+            description: "Every perfume comes in elegant packaging, perfect for gifting.",
+        },
+        {
+            icon: <Shield className="w-10 h-10 text-purple-600" />,
+            title: "100% Authentic",
+            description: "We guarantee original fragrances sourced from top luxury brands.",
+        },
+    ];
+
+    // for Feedback code here
+    const reviews = [
+        {
+            name: "Aarav Singh",
+            role: "Luxury Enthusiast",
+            comment: "Absolutely loved the fragrance! Elegant, long-lasting, and perfectly packaged.",
+            img: "https://randomuser.me/api/portraits/men/32.jpg",
+        },
+        {
+            name: "Meera Sharma",
+            role: "Perfume Collector",
+            comment: "The scents are exquisite. I can feel the luxury in every bottle.",
+            img: "https://randomuser.me/api/portraits/women/44.jpg",
+        },
+        {
+            name: "Rohan Kapoor",
+            role: "Gift Buyer",
+            comment: "Bought this as a gift and it was a huge hit! Premium feel and amazing aroma.",
+            img: "https://randomuser.me/api/portraits/men/56.jpg",
+        },
+    ];
+    const [index2, setIndex2] = useState(0);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIndex2((prev) => (prev + 1) % reviews.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
+
+    // time limit code heres
+    const [timeLeft, setTimeLeft] = useState({
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+    });
+    useEffect(() => {
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 5); // Offer ends in 5 days
+
+        const interval = setInterval(() => {
+            const now = new Date();
+            const difference = targetDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((difference / 1000 / 60) % 60);
+            const seconds = Math.floor((difference / 1000) % 60);
+
+            setTimeLeft({ days, hours, minutes, seconds });
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+
+    const perfumes = [
+        { name: "Rose Essence", price: "$120", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXuZ4Cq0glDaZctp-MUHtoIDyQSJ3qu8paag&s" },
+        { name: "Amber Delight", price: "$150", image: "https://cdn-jplbd.nitrocdn.com/ZtNzbyfaurmWxnYQHAjGXcKTQXuJwHgK/assets/images/optimized/rev-605c21c/nosemuse.com/wp-content/uploads/2023/08/athena9280_An_elegantly_designed_perfume_bottle_placed_on_a_ped_02578292-3bee-4bc5-bb64-562caf7dca48.png" },
+        { name: "Citrus Bliss", price: "$95", image: "https://images-static.nykaa.com/media/catalog/product/e/1/e1bb8cfFREAI00000085b_b5.jpg?tr=w-500" },
+        { name: "Rose Essence", price: "$130", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0WeKTq9rk9omKvtKDVWFDObBxus7VBiw5Eg&s" },
+        { name: "Musk Aura", price: "$140", image: "https://static.vecteezy.com/system/resources/thumbnails/057/278/453/small_2x/mockup-clear-limpid-glass-packaging-perfume-bottle-in-black-fabric-photo.jpg" },
+    ];
+
+    const [currentIndexs, setCurrentIndexs] = useState(0);
+
+    // Auto-slide every 3s
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndexs((prev) => (prev + 1) % perfumes.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const nextSlide = () => {
+        setCurrentIndexs((prev) => (prev + 1) % perfumes.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentIndexs((prev) => (prev - 1 + perfumes.length) % perfumes.length);
+    };
+
+    const visiblePerfumes = [];
+    const slidesToShow = window.innerWidth < 640 ? 1 : window.innerWidth < 768 ? 2 : 3;
+    for (let i = 0; i < slidesToShow; i++) {
+        visiblePerfumes.push(perfumes[(currentIndex + i) % perfumes.length]);
+    }
+
+
+
     return (
         <>
             <div className="container-fluid">
@@ -163,10 +245,9 @@ function Home() {
                         </div>
                     </div>
                 </div>
-
                 <div className="row">
                     <div className="py-12 bg-gradient-to-r from-amber-900 via-[#2c1810] to-black">
-                        <div className="max-w-7xl mx-auto px-4">
+                        <div className="max-w-7xl mx-auto px-4 relative">
                             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
                                 Featured Perfumes
                             </h2>
@@ -174,42 +255,50 @@ function Home() {
                             <div className="relative overflow-hidden">
                                 <AnimatePresence mode="wait">
                                     <motion.div
-                                        key={currentIndex}
+                                        key={currentIndexs}
                                         initial={{ opacity: 0, x: 100 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         exit={{ opacity: 0, x: -100 }}
                                         transition={{ duration: 0.8 }}
                                         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
                                     >
-                                        {perfumes
-                                            .slice(currentIndex, currentIndex + 3)
-                                            .map((perfume, idx) => (
-                                                <motion.div
-                                                    key={idx}
-                                                    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
-                                                >
-                                                    <img
-                                                        src={perfume.image}
-                                                        alt={perfume.name}
-                                                        className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300 rounded-t-2xl"
-                                                    />
-                                                    <div className="p-5 text-center">
-                                                        <h3 className="text-lg font-semibold text-gray-900">
-                                                            {perfume.name}
-                                                        </h3>
-                                                        <p className="text-purple-700 font-medium mt-1">
-                                                            {perfume.price}
-                                                        </p>
-                                                    </div>
-                                                </motion.div>
-                                            ))}
+                                        {visiblePerfumes.map((perfume, idx) => (
+                                            <motion.div
+                                                key={idx}
+                                                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                                                whileHover={{ scale: 1.05 }}
+                                            >
+                                                <img
+                                                    src={perfume.image}
+                                                    alt={perfume.name}
+                                                    className="w-full h-64 sm:h-52 md:h-64 object-cover rounded-t-2xl"
+                                                />
+                                                <div className="p-5 text-center">
+                                                    <h3 className="text-lg font-semibold text-gray-900">{perfume.name}</h3>
+                                                    <p className="text-purple-700 font-medium mt-1">{perfume.price}</p>
+                                                </div>
+                                            </motion.div>
+                                        ))}
                                     </motion.div>
                                 </AnimatePresence>
+
+                                {/* Arrows */}
+                                <button
+                                    onClick={prevSlide}
+                                    className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-2 rounded-full z-10"
+                                >
+                                    &#8592;
+                                </button>
+                                <button
+                                    onClick={nextSlide}
+                                    className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-2 rounded-full z-10"
+                                >
+                                    &#8594;
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div className="row">
                     <section className="py-16 bg-gradient-to-r from-purple-50 via-white to-purple-50">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -222,7 +311,6 @@ function Home() {
                             >
                                 Explore <span className="text-purple-600">Categories</span>
                             </motion.h2>
-
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                                 {categories.map((cat, index) => (
                                     <motion.div
@@ -247,10 +335,139 @@ function Home() {
                         </div>
                     </section>
                 </div>
+                <div className="row">
+                    <div className="py-16 bg-gradient-to-r from-purple-50 via-white to-purple-50">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                            <motion.h2
+                                className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6 }}
+                            >
+                                Luxury You <span className="text-purple-600">Can Trust</span>
+                            </motion.h2>
+                            <motion.p
+                                className="text-gray-600 max-w-xl mx-auto mb-12"
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.2, duration: 0.6 }}
+                            >
+                                Experience the luxury, quality, and trust that set our perfumes apart.
+                            </motion.p>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {features.map((feature, index) => (
+                                    <motion.div
+                                        key={index}
+                                        className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300"
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: index * 0.2, duration: 0.6 }}
+                                    >
+                                        <div className="flex justify-center mb-4">{feature.icon}</div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                                        <p className="text-gray-600">{feature.description}</p>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="py-16 bg-gradient-to-r from-purple-50 via-white to-purple-50">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6">
+                                The Essence of <span className="text-purple-600">Reviews</span>
+                            </h2>
+
+                            <div className="relative overflow-hidden">
+                                <motion.div
+                                    key={index2}
+                                    initial={{ x: 300, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    exit={{ x: -300, opacity: 0 }}
+                                    transition={{ duration: 0.8 }}
+                                    className="flex gap-6 justify-center"
+                                >
+                                    {[0, 1, 2].map((offset) => {
+                                        const review = reviews[(index + offset) % reviews.length];
+                                        return (
+                                            <div
+                                                key={offset}
+                                                className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center min-w-[250px] max-w-[300px] hover:shadow-2xl transition-shadow duration-300"
+                                            >
+                                                <img
+                                                    src={review.img}
+                                                    alt={review.name}
+                                                    className="w-20 h-20 rounded-full mb-4 object-cover"
+                                                />
+                                                <h3 className="text-lg font-semibold text-gray-900">{review.name}</h3>
+                                                <p className="text-purple-600 text-sm mb-2">{review.role}</p>
+                                                <p className="text-gray-600 text-center">{review.comment}</p>
+                                            </div>
+                                        );
+                                    })}
+                                </motion.div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="py-16 bg-gradient-to-r from-purple-600 via-pink-500 to-rose-500 text-white">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                            <motion.h2
+                                className="text-3xl md:text-4xl font-extrabold mb-4"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6 }}
+                            >
+                                Limited Time <span className="text-yellow-300">Offer!</span>
+                            </motion.h2>
+
+                            <motion.p
+                                className="text-lg md:text-xl mb-8 max-w-xl mx-auto"
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.2, duration: 0.6 }}
+                            >
+                                Grab your favorite luxury perfumes at exclusive discounted prices. Don’t miss out!
+                            </motion.p>
+                            <div className="flex justify-center gap-6 text-center mb-8">
+                                {["days", "hours", "minutes", "seconds"].map((unit) => (
+                                    <motion.div
+                                        key={unit}
+                                        className="bg-white/20 backdrop-blur-md rounded-2xl px-4 py-3 min-w-[70px]"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.3 }}
+                                    >
+                                        <div className="text-2xl font-bold">
+                                            {timeLeft[unit] < 10 ? `0${timeLeft[unit]}` : timeLeft[unit]}
+                                        </div>
+                                        <div className="text-xs uppercase tracking-wide">{unit}</div>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            <motion.a
+                                href="/shop"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="inline-block px-8 py-3 rounded-full bg-yellow-300 text-purple-700 font-semibold shadow-lg hover:shadow-xl transition"
+                            >
+                                Shop Now
+                            </motion.a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
-
-    // comment home page
 }
 export default Home;
