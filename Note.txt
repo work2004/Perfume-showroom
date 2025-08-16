@@ -1,68 +1,152 @@
-Homepage design
-
-Product listing (Shop page)
-
-Cart & checkout
-
-Login/Signup with Protected Routes
-
-Admin panel for product management
-
-
-"https://images.unsplash.com/photo-1523293182086-7651a899d37f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyZnVtZSUyMGJvdHRsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "https://images.pexels.com/photos/1961792/pexels-photo-1961792.jpeg?cs=srgb&dl=pexels-valeriya-1961792.jpg&fm=jpg",
-                "https://images.pexels.com/photos/1961792/pexels-photo-1961792.jpeg?cs=srgb&dl=pexels-valeriya-1961792.jpg&fm=jpg",
-
-
-
-
-                const perfumes = [
-  {
-    id: 1,
-    name: "Ocean Breeze",
-    price: "₹2500",
-    description:
-      "A fresh, invigorating scent with hints of sea salt and citrus, perfect for daytime wear and summer vibes.",
-    images: [
-      "https://i.ebayimg.com/images/g/9FgAAOSwi9Nm2GJ-/s-l1200.jpg",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU-PfO-UjVMk5pIAQzK9u4knT9V3aVVNrFrlSBOfHJ1Bi5vy_UoJmV7wHbxTdXX4GLftU&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiEYAga2vZ0NhkIXgIOaOHhHnz2fuVGzXMmzlZPknVMFX8XqetE-WT8DYG7lbe_5_-yqs&usqp=CAU",
-    ],
-  },
-  {
-    id: 2,
-    name: "Mystic Oud",
-    price: "₹3200",
-    description:
-      "An exotic, deep fragrance with rich oud and smoky undertones, ideal for evening events or special occasions.",
-    images: [
-      "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
-    ],
-  },
-  {
-    id: 3,
-    name: "Rose Elegance",
-    price: "₹1800",
-    description:
-      "A delicate floral fragrance with notes of fresh roses and soft musk, creating a romantic and elegant aura.",
-    images: [
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT7R_IDLOIVI10p1gf6QwhCn0C9OWYF-jMjw&s",
-      "https://images.meesho.com/images/products/521326816/qkpyt_512.jpg",
-      "https://images.meesho.com/images/products/521348323/ox8wc_256.webp",
-    ],
-  },
-  {
-    id: 4,
-    name: "Citrus Delight",
-    price: "₹2000",
-    description:
-      "A vibrant, energizing perfume with bright citrus notes, perfect for daily wear and uplifting your mood.",
-    images: [
-      "https://5.imimg.com/data5/SELLER/Default/2025/1/481739661/TS/TI/KV/25292871/50-ml-connec-citrus-delight-perfumes-500x500.jpg",
-      "https://images.meesho.com/images/products/444357973/nobia_512.webp?width=512",
-      "https://images.meesho.com/images/products/444357973/j9stp_512.webp?width=512",
-    ],
-  }
+const perfumes = [
+    {
+        id: 1,
+        name: "Ocean Breeze",
+        brand: "AquaScents",
+        volume: "50ml",
+        price: "₹2500",
+        rating: 4.5,
+        description:
+            "A fresh, invigorating scent with hints of sea salt and citrus, perfect for daytime wear and summer vibes.",
+        images: [
+            "https://rukminim2.flixcart.com/image/704/844/xif0q/perfume/5/1/t/100-ocean-breeze-perfume-fresh-and-exhilarating-scent-long-original-imagz3y44zaxtntm.jpeg?q=90&crop=false",
+            "https://labelleperfumes.com/cdn/shop/files/ocean-breeze-milestone_1024x.webp?v=1720725925",
+            "https://i.ebayimg.com/images/g/VgAAAOSw5GhmYf63/s-l400.jpg",
+        ],
+    },
+    {
+        id: 2,
+        name: "Mystic Oud",
+        brand: "OudElixir",
+        volume: "100ml",
+        price: "₹3200",
+        rating: 4.8,
+        description:
+            "An exotic, deep fragrance with rich oud and smoky undertones, ideal for evening events or special occasions.",
+        images: [
+            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+        ],
+    },
+    {
+        id: 3,
+        name: "Rose Elegance",
+        brand: "FloraFragrance",
+        volume: "75ml",
+        price: "₹1800",
+        rating: 4.3,
+        description:
+            "A romantic floral scent with delicate rose notes, perfect for casual and evening wear.",
+        images: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVbwfGUMetN1dgs9EaiPjbUdWIqn6dDwaNsw&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT7R_IDLOIVI10p1gf6QwhCn0C9OWYF-jMjw&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjK0jrrry9hoMm7c1-e_jOz4OwtVCKk8Nv-w&s",
+        ],
+    },
+    {
+        id: 4,
+        name: "Citrus Delight",
+        brand: "FreshAura",
+        volume: "60ml",
+        price: "₹2000",
+        rating: 4.6,
+        description:
+            "Zesty and refreshing citrus fragrance that energizes and uplifts your mood throughout the day.",
+        images: [
+            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+        ],
+    },
+    {
+        id: 5,
+        name: "Vanilla Charm",
+        brand: "SweetScent",
+        volume: "50ml",
+        price: "₹1900",
+        rating: 4.2,
+        description:
+            "A warm and comforting vanilla fragrance with a hint of caramel, ideal for cozy evenings.",
+        images: [
+            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+        ],
+    },
+    {
+        id: 6,
+        name: "Spice Mystique",
+        brand: "ExoticEssence",
+        volume: "100ml",
+        price: "₹3500",
+        rating: 4.7,
+        description:
+            "A bold, spicy fragrance with hints of cinnamon and clove, perfect for winter nights and parties.",
+        images: [
+            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+        ],
+    },
+    {
+        id: 7,
+        name: "Lavender Dreams",
+        brand: "CalmAura",
+        volume: "75ml",
+        price: "₹2200",
+        rating: 4.4,
+        description:
+            "Relaxing lavender scent with floral undertones, ideal for a peaceful and soothing experience.",
+        images: [
+            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+        ],
+    },
+    {
+        id: 8,
+        name: "Amber Night",
+        brand: "GoldenScent",
+        volume: "100ml",
+        price: "₹3300",
+        rating: 4.6,
+        description:
+            "A mysterious amber fragrance with warm and sensual undertones, perfect for evening occasions.",
+        images: [
+            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+        ],
+    },
+    {
+        id: 9,
+        name: "Jasmine Glow",
+        brand: "FloraLuxe",
+        volume: "50ml",
+        price: "₹2100",
+        rating: 4.5,
+        description:
+            "A soft jasmine scent with floral sweetness, ideal for casual and daytime wear.",
+        images: [
+            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+        ],
+    },
+    {
+        id: 10,
+        name: "Woody Essence",
+        brand: "NatureBlend",
+        volume: "90ml",
+        price: "₹2800",
+        rating: 4.7,
+        description:
+            "Earthy woody fragrance with cedar and sandalwood notes, perfect for a sophisticated and natural scent.",
+        images: [
+            "https://m.media-amazon.com/images/I/51DEBqq+TsL.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFFtUUVGI66iHKoHoDQBUCpNVKnNGAWhneg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXUNSirxIOPko5IDYHc04tPZj60rowBG77hw&s",
+        ],
+    },
 ];
