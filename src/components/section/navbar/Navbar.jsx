@@ -31,6 +31,11 @@ function Navbar() {
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
+    function navsound(){
+                const audio = new Audio("/navbar.wav"); // put file in public/sounds/
+        audio.play().catch(err => console.log("Sound play blocked:", err));
+    }
+
     return (
         <>
             <motion.div
@@ -68,6 +73,7 @@ function Navbar() {
                                                 ? "text-amber-400 font-bold border-b-2 border-amber-400"
                                                 : "text-white hover:text-amber-300 transition"
                                         }
+                                        onClick={navsound}
                                     >
                                         {navItem.path}
                                     </NavLink>

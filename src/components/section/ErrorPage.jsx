@@ -60,6 +60,7 @@ const ErrorPage = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
       >
+        
         <Link
           to="/"
           className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition-all"
